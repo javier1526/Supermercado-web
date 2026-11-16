@@ -33,7 +33,7 @@ Actualmente no incluye gestión de ofertas ni horarios de atención. Tampoco rea
 Instala Python 3.14.7 de 64 bits, MySQL Community Server 8.4 y Git. Mantén el servicio MySQL en ejecución. Sustituye la URL del ejemplo por la del repositorio publicado:
 
 ```powershell
-git clone https://github.com/USUARIO/sistema-web-supermercado.git
+git clone https://github.com/javier1526/Supermercado-web.git
 Set-Location sistema-web-supermercado
 python --version
 ```
