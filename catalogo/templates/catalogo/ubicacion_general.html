@@ -1,0 +1,30 @@
+{% extends "catalogo/base_publica.html" %}
+{% block titulo %}Ubicación{% endblock %}
+{% block contenido_publico %}
+<main class="container py-4 py-lg-5">
+  <h1 class="h2">Ubicación</h1>
+  <p class="mb-4">Elige qué deseas consultar.</p>
+  <div class="row g-4">
+    <div class="col-12 col-md-6">
+      <a class="opcion-ubicacion card tarjeta-personal rounded-4 h-100 text-decoration-none link-body-emphasis" href="{% url 'cliente:plano' %}">
+        <div class="card-body p-4 p-lg-5">
+          <span class="icono-acceso">{% include "personal/icono.html" with nombre="plano" %}</span>
+          <div><h2 class="h4">Plano general</h2>
+          <p class="mb-0">Abrir pantalla dedicada al plano estático del supermercado.</p></div>
+          <span class="flecha-opcion">{% include "personal/icono.html" with nombre="flecha" %}</span>
+        </div>
+      </a>
+    </div>
+    <div class="col-12 col-md-6">
+      <a class="opcion-ubicacion card tarjeta-personal rounded-4 h-100 text-decoration-none link-body-emphasis" href="{% url 'cliente:pasillos' %}">
+        <div class="card-body p-4 p-lg-5">
+          <span class="icono-acceso">{% include "personal/icono.html" with nombre="ubicacion" %}</span>
+          <div><h2 class="h4">Consultar por pasillo</h2>
+          <p class="mb-0">Abrir la lista de pasillos y consultar sus productos.</p></div>
+          <span class="flecha-opcion">{% include "personal/icono.html" with nombre="flecha" %}</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</main>
+{% endblock %}

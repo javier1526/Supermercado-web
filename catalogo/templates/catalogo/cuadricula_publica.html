@@ -1,0 +1,5 @@
+<ul class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-3 list-unstyled">
+  {% for producto in productos %}
+    <li class="col">{% include "catalogo/tarjeta_publica.html" %}</li>
+  {% endfor %}
+</ul>

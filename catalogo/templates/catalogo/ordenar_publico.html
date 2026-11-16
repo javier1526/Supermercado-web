@@ -1,0 +1,11 @@
+<form method="get" class="ordenar-productos">
+  {% if enviada %}<input type="hidden" name="consulta" value="{{ consulta }}">{% endif %}
+  <div>
+    <label for="orden">Ordenar por</label>
+    <select class="form-select" id="orden" name="orden">
+      <option value="nombre"{% if orden == "nombre" %} selected{% endif %}>Nombre A–Z</option>
+      <option value="precio"{% if orden == "precio" %} selected{% endif %}>Precio de menor a mayor</option>
+    </select>
+  </div>
+  <div><button class="btn boton-salida" type="submit">{% include "personal/icono.html" with nombre="ordenar" %}Ordenar</button></div>
+</form>

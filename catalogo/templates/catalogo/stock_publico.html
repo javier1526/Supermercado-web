@@ -1,0 +1,5 @@
+{% if producto.stock == 0 %}
+  <p class="badge text-bg-danger text-wrap mb-0">Sin stock</p>
+{% else %}
+  <p class="badge aviso-personal text-wrap mb-0">Stock: {{ producto.stock }} unidad{{ producto.stock|pluralize:"es" }} disponible{{ producto.stock|pluralize:"s" }}</p>
+{% endif %}

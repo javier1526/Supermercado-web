@@ -1,0 +1,20 @@
+<svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+{% if nombre == "inicio" %}<path d="m3 10 9-7 9 7v11h-6v-7H9v7H3Z"/>
+{% elif nombre == "categorias" %}<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+{% elif nombre == "ubicacion" %}<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>
+{% elif nombre == "buscar" %}<circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/>
+{% elif nombre == "volver" %}<path d="m12 4-8 8 8 8M4 12h17"/>
+{% elif nombre == "flecha" %}<path d="m9 5 7 7-7 7"/>
+{% elif nombre == "salir" %}<path d="M10 3H3v18h7m5-15 6 6-6 6M8 12h13"/>
+{% elif nombre == "personal" %}<circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><path d="M1 21v-3a6 6 0 0 1 12 0v3m0-7a6 6 0 0 1 10 4v3"/>
+{% elif nombre == "usuario" %}<circle cx="12" cy="7" r="4"/><path d="M3 22v-3a9 9 0 0 1 18 0v3"/>
+{% elif nombre == "candado" %}<rect x="5" y="10" width="14" height="12" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4"/>
+{% elif nombre == "reloj" %}<circle cx="12" cy="12" r="9"/><path d="M12 6v6l5 3"/>
+{% elif nombre == "pendientes" %}<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 8h6m-6 5h6"/>
+{% elif nombre == "precio" %}<path d="M12 2v20m5-16H9a3.5 3.5 0 0 0 0 7h6a3.5 3.5 0 0 1 0 7H6"/>
+{% elif nombre == "plano" %}<path d="M3 3h18v18H3Zm6 0v18m7-18v18M3 10h18m-18 6h18"/>
+{% elif nombre == "ordenar" %}<path d="M7 3v18m-4-4 4 4 4-4M17 21V3m-4 4 4-4 4 4"/>
+{% elif nombre == "advertencia" %}<circle cx="12" cy="12" r="10"/><path d="M12 6v7m0 4h.01"/>
+{% else %}<path d="m12 2 10 5-10 5L2 7Zm-10 5v11l10 5 10-5V7M12 12v11"/>
+{% endif %}
+</svg>

@@ -1,0 +1,703 @@
+:root {
+  --verde-principal: #11834b;
+  --verde-oscuro: #006b3c;
+  --verde-suave: #e8f5ec;
+  --fondo-personal: #f7faf8;
+  --blanco: #fff;
+  --texto-personal: #20362a;
+  --borde-personal: #ceded3;
+  --borde-control: #718579;
+  --texto-secundario: #536d5e;
+}
+
+.pantalla-personal {
+  background: var(--fondo-personal);
+  color: var(--texto-personal);
+  overflow-wrap: anywhere;
+  font-family: Arial, sans-serif;
+}
+
+.acceso-personal {
+  max-width: 32rem;
+}
+
+.marca-acceso, .aviso-personal {
+  background: var(--verde-suave);
+  color: var(--verde-oscuro);
+}
+
+.marca-sello {
+  display: grid;
+  flex: none;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border-radius: 0.75rem;
+  background: var(--verde-oscuro);
+  color: var(--blanco);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.marca-sello-chico {
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1rem;
+}
+
+.tarjeta-personal {
+  --bs-card-color: var(--texto-personal);
+  --bs-card-border-color: var(--borde-personal);
+}
+
+.cabecera-personal {
+  border-bottom: 1px solid var(--borde-personal);
+  background: var(--blanco);
+}
+
+.pantalla-personal label {
+  margin-bottom: 0.375rem;
+  font-weight: 600;
+}
+
+.pantalla-personal :is(.btn, .form-control, .form-select) {
+  min-height: 44px;
+}
+
+.pantalla-personal :is(.form-control, .form-select) {
+  border-color: var(--borde-control);
+}
+
+.pantalla-personal :is(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--verde-oscuro);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
+.boton-personal {
+  --bs-btn-color: var(--blanco);
+  --bs-btn-bg: var(--verde-oscuro);
+  --bs-btn-border-color: var(--verde-oscuro);
+  --bs-btn-hover-color: var(--blanco);
+  --bs-btn-hover-bg: var(--verde-principal);
+  --bs-btn-hover-border-color: var(--verde-principal);
+  --bs-btn-active-color: var(--blanco);
+  --bs-btn-active-bg: var(--verde-oscuro);
+  --bs-btn-active-border-color: var(--verde-oscuro);
+  font-weight: 600;
+}
+
+.boton-salida {
+  --bs-btn-color: var(--verde-oscuro);
+  --bs-btn-border-color: var(--verde-oscuro);
+  --bs-btn-hover-color: var(--verde-oscuro);
+  --bs-btn-hover-bg: var(--verde-suave);
+  --bs-btn-hover-border-color: var(--verde-oscuro);
+  --bs-btn-active-color: var(--verde-oscuro);
+  --bs-btn-active-bg: var(--verde-suave);
+  --bs-btn-active-border-color: var(--verde-oscuro);
+}
+
+.pantalla-personal .errorlist {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+@media (min-width: 992px) {
+  .acceso-personal {
+    max-width: 62rem;
+  }
+}
+
+.interfaz-publica {
+  padding-bottom: 5rem;
+}
+
+.navegacion-publica {
+  position: fixed;
+  z-index: 1030;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.75rem;
+  border-top: 1px solid var(--borde-personal);
+  background: var(--blanco);
+}
+
+.carrusel-productos {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 1rem) / 2);
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0.5rem 0.5rem 0.75rem;
+}
+
+.carrusel-productos > li {
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.carrusel-productos:focus-visible, .visor-plano:focus-visible {
+  outline: 2px solid var(--verde-oscuro);
+  outline-offset: 3px;
+}
+
+.visor-plano {
+  overflow: auto;
+  max-height: 70vh;
+}
+
+.imagen-plano {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .interfaz-publica {
+    padding-bottom: 0;
+  }
+  .navegacion-publica {
+    position: static;
+    width: auto;
+    padding: 0;
+    border-top: 0;
+  }
+  .carrusel-productos {
+    grid-auto-columns: calc((100% - 3rem) / 4);
+  }
+}
+
+.icono {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  vertical-align: middle;
+}
+
+.pantalla-personal :is(h1,h2,h3) {
+  font-weight: 700;
+}
+
+.pantalla-personal .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  border-radius: .7rem;
+}
+
+.pantalla-personal :is(.form-control,.form-select) {
+  border-radius: .65rem;
+  padding: .8rem .9rem;
+}
+
+.pantalla-personal .form-text {
+  color: var(--texto-secundario);
+  line-height: 1.6;
+}
+
+.tarjeta-personal {
+  border-radius: 1rem;
+  border-width: 1px;
+  background: var(--blanco);
+}
+
+.aviso-personal {
+  border: 1px solid var(--borde-personal);
+  border-radius: .8rem;
+}
+
+.retorno {
+  background: var(--verde-suave);
+  border: 0;
+}
+
+.retorno .icono {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.resumen-producto {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  border: 1px solid var(--borde-personal);
+  border-radius: 1rem;
+  background: var(--verde-suave);
+  margin-bottom: 1.5rem;
+}
+
+.resumen-producto > div {
+  min-width: 0;
+}
+
+.resumen-producto h2 {
+  font-size: 1.15rem;
+  margin-bottom: .4rem;
+}
+
+.resumen-producto p {
+  margin-bottom: .4rem;
+  color: var(--texto-secundario);
+}
+
+.miniatura-producto {
+  width: 5rem;
+  height: 6rem;
+  object-fit: contain;
+  background: var(--blanco);
+  border-radius: .7rem;
+  flex: none;
+}
+
+.marco-miniatura {
+  display: grid;
+  place-items: center;
+  background: var(--verde-suave);
+  border-radius: .7rem;
+  color: var(--verde-oscuro);
+  width: 5rem;
+  height: 6rem;
+  flex: none;
+}
+
+.valor-actual {
+  padding: 1rem;
+  background: var(--verde-suave);
+  border-radius: .7rem;
+  margin-top: .7rem;
+}
+
+.valor-actual strong {
+  font-size: 1.4rem;
+}
+
+.pantalla-personal :is(#id_stock,#id_precio_normal,#id_precio_inicial) {
+  font-size: 1.6rem;
+  font-weight: 700;
+  min-height: 64px;
+}
+
+.estado-producto {
+  display: inline-flex;
+  padding: .4rem .8rem;
+  border-radius: .6rem;
+  background: var(--verde-suave);
+  color: var(--verde-oscuro);
+  font-size: .85rem;
+  font-weight: 700;
+}
+
+.pantalla-personal .btn-outline-danger {
+  background: var(--bs-danger-bg-subtle);
+  color: var(--bs-danger-text-emphasis);
+  border-color: var(--bs-danger-border-subtle);
+  font-weight: 700;
+}
+
+.pantalla-personal .btn-outline-danger:hover {
+  background: var(--bs-danger);
+  color: var(--blanco);
+}
+
+.pantalla-personal .modal-content {
+  border: 1px solid var(--borde-control);
+}
+
+.pantalla-personal .modal-body {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.pantalla-personal .modal-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1.25rem;
+  gap: .75rem;
+  border: 0;
+}
+
+.pantalla-personal .modal-footer > * {
+  margin: 0;
+}
+
+.pantalla-personal .modal-footer .btn {
+  width: 100%;
+  min-height: 56px;
+}
+
+.pantalla-personal .modal-body > .icono {
+  display: block;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1rem;
+  color: var(--bs-danger);
+}
+
+.cabecera-formulario {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin-bottom: 1.5rem;
+}
+
+.cabecera-formulario h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.cabecera-formulario .retorno {
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  padding: .7rem;
+  flex: none;
+}
+
+.pantalla-personal main:not(.acceso-personal):not(.panel-personal) > a.boton-salida:first-child {
+  background: var(--verde-suave);
+  border: 0;
+  margin-bottom: 1.2rem !important;
+}
+
+.pantalla-personal main:not(.acceso-personal) > h1 {
+  font-size: 1.6rem;
+}
+
+.formulario-registro {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.formulario-registro #vista-previa {
+  padding: 1rem;
+  background: var(--verde-suave);
+  border-radius: .8rem;
+}
+
+#vista-previa-ubicacion img {
+  max-height: 24rem;
+  object-fit: contain;
+}
+
+.panel-personal > h1 {
+  margin-top: .5rem;
+}
+
+.tarjeta-acceso {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  height: 100%;
+  border: 1px solid var(--borde-personal);
+  border-radius: 1rem;
+  background: var(--blanco);
+}
+
+.tarjeta-acceso h3 {
+  font-size: 1.1rem;
+  margin-bottom: .5rem;
+}
+
+.tarjeta-acceso p {
+  color: var(--texto-secundario);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.icono-acceso {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4.5rem;
+  flex: none;
+  background: var(--verde-suave);
+  border-radius: .9rem;
+  color: var(--verde-oscuro);
+}
+
+.icono-acceso .icono {
+  width: 2.3rem;
+  height: 2.3rem;
+}
+
+.enlace-acceso {
+  color: var(--texto-personal);
+  text-decoration: none;
+}
+
+.enlace-acceso::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  border-radius: 1rem;
+}
+
+.enlace-acceso:focus-visible::after {
+  outline: 3px solid var(--verde-oscuro);
+  outline-offset: 3px;
+}
+
+.tarjeta-acceso > .icono {
+  margin-left: auto;
+  color: var(--verde-oscuro);
+}
+
+.tarjeta-acceso.destacada {
+  background: var(--verde-suave);
+  border: 2px solid var(--verde-oscuro);
+}
+
+.tarjeta-acceso.destacada .icono-acceso {
+  background: var(--blanco);
+}
+
+.acceso-personal {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  max-width: 32rem;
+}
+
+.identidad-acceso {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.identidad-acceso .marca-sello {
+  margin: 0 auto 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.identidad-acceso p {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.formulario-acceso {
+  border: 1px solid var(--borde-personal);
+  border-radius: 1.3rem;
+  padding: 1.75rem 1.5rem;
+  background: var(--blanco);
+}
+
+.emblema-personal {
+  display: grid;
+  place-items: center;
+  background: var(--verde-suave);
+  color: var(--verde-oscuro);
+  border-radius: 4rem;
+  width: 6.5rem;
+  height: 4.2rem;
+  margin: 0 auto 1.5rem;
+}
+
+.emblema-personal .icono {
+  width: 3rem;
+  height: 3rem;
+}
+
+.formulario-acceso h1 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.formulario-acceso h1 + p {
+  text-align: center;
+  color: var(--texto-secundario);
+  margin-bottom: 2rem;
+}
+
+.campo-con-icono {
+  position: relative;
+}
+
+.campo-con-icono > .icono {
+  position: absolute;
+  top: 50%;
+  left: .9rem;
+  transform: translateY(-50%);
+  color: var(--verde-oscuro);
+  pointer-events: none;
+}
+
+.campo-con-icono .form-control {
+  padding-left: 3rem;
+}
+
+.formulario-acceso .btn {
+  min-height: 54px;
+}
+
+@media (min-width: 992px) {
+  .acceso-personal {
+    max-width: 32rem;
+    padding-top: 3.5rem;
+  }
+  .tarjeta-acceso {
+    min-height: 150px;
+    padding: 1.5rem;
+  }
+  .panel-personal {
+    max-width: 1140px;
+  }
+  .pantalla-personal main > h1 {
+    font-size: 2rem;
+  }
+}
+
+.buscador-administrativo {
+  max-width: 48rem;
+}
+
+.control-busqueda-personal {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .3rem;
+  border: 1px solid var(--borde-control);
+  border-radius: .8rem;
+  background: var(--blanco);
+}
+
+.control-busqueda-personal > .icono {
+  margin-left: .6rem;
+  color: var(--texto-secundario);
+}
+
+.control-busqueda-personal input {
+  min-width: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+.control-busqueda-personal button {
+  width: 48px;
+  flex: none;
+}
+
+.fotografia-ubicacion-edicion {
+  display: block;
+  max-height: 24rem;
+  width: 100%;
+  object-fit: contain;
+  background: var(--verde-suave);
+}
+
+@media (max-width: 991.98px) {
+  .edicion-operativa > .row > section > .card {
+    border: 0;
+    background: transparent;
+  }
+  .edicion-operativa > .row > section > .card > .card-body {
+    padding: 0 !important;
+  }
+  .formulario-registro {
+    border: 0;
+  }
+}
+
+.presentacion-revision {
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+  border-bottom: 1px solid var(--borde-personal);
+  padding-bottom: 1rem;
+}
+
+.presentacion-revision > div {
+  min-width: 0;
+}
+
+.presentacion-revision h2 {
+  font-size: 1.2rem;
+}
+
+.presentacion-revision dt {
+  font-size: .8rem;
+  color: var(--texto-secundario);
+  font-weight: 400;
+}
+
+.presentacion-revision dd {
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.fotografia-revision {
+  width: 35%;
+  height: auto;
+  max-height: 16rem;
+  object-fit: contain;
+  background: var(--verde-suave);
+  border-radius: .8rem;
+  padding: .5rem;
+}
+
+.solicitud-pendiente .card-body > div {
+  min-width: 0;
+}
+
+.solicitud-pendiente h3 {
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .fotografia-revision {
+    width: 40%;
+  }
+}
+
+.valor-actual strong.h6 {
+  font-size: 1rem;
+}
+
+.pantalla-personal input[type=file] {
+  font-size: .8rem;
+  padding: .7rem;
+}
+
+.ficha-gestion .resumen-producto {
+  padding: 0 0 1.2rem;
+  border: 0;
+  border-bottom: 1px solid var(--borde-personal);
+  border-radius: 0;
+  background: transparent;
+}
+
+.pantalla-personal main .boton-personal {
+  min-height: 52px;
+}
+
+@media (max-width: 767.98px) {
+  .cabecera-panel .container {
+    flex-wrap: nowrap !important;
+  }
+  .cabecera-panel .marca-sello {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  .cabecera-panel .fw-semibold {
+    font-size: .8rem;
+  }
+  .cabecera-panel .small {
+    font-size: .65rem;
+  }
+  .cabecera-panel button {
+    padding: .4rem;
+    gap: .3rem;
+    font-size: .7rem;
+    white-space: nowrap;
+  }
+  .cabecera-panel button .icono {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+}

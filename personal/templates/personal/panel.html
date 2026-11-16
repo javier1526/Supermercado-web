@@ -1,0 +1,48 @@
+{% extends "personal/base.html" %}
+
+{% block titulo %}{{ titulo }}{% endblock %}
+
+{% block contenido %}
+<header class="cabecera-personal cabecera-panel">
+  <div class="container d-flex flex-wrap align-items-center justify-content-between gap-2 py-3">
+    <div class="d-flex align-items-center gap-2">
+      <span class="marca-sello marca-sello-chico" aria-hidden="true">S</span>
+      <div><p class="fw-semibold mb-0">Supermercado Central</p><p class="small mb-0">Panel administrativo</p></div>
+    </div>
+    <form method="post" action="{% url 'personal:cerrar_sesion' %}">
+      {% csrf_token %}
+      <button class="btn boton-salida" type="submit">{% include "personal/icono.html" with nombre="salir" %}Cerrar sesión</button>
+    </form>
+  </div>
+</header>
+<main class="panel-personal container py-4 py-lg-5">
+  <h1 class="h2 mb-2">{{ titulo }}</h1>
+  <p class="mb-4">Hola, {{ user.first_name }}.</p>
+  {% for mensaje in messages %}
+    <p class="alert aviso-personal" role="status">{{ mensaje }}</p>
+  {% endfor %}
+
+  <h2 class="h5">Accesos principales</h2>
+  <p class="mb-4">Selecciona la función que necesitas.</p>
+  <ul class="row row-cols-1 row-cols-md-2 g-3 list-unstyled mb-0">
+    {% for nombre, descripcion, enlace in secciones %}
+      <li class="col">
+        <div class="tarjeta-acceso{% if nombre == 'Productos pendientes' %} destacada{% endif %}">
+          <span class="icono-acceso">
+            {% if nombre == "Productos pendientes" %}{% include "personal/icono.html" with nombre="pendientes" %}
+            {% elif nombre == "Actualizar ubicación" %}{% include "personal/icono.html" with nombre="ubicacion" %}
+            {% elif nombre == "Última actualización" %}{% include "personal/icono.html" with nombre="reloj" %}
+            {% elif nombre == "Gestión desde la ficha" %}{% include "personal/icono.html" with nombre="precio" %}
+            {% else %}{% include "personal/icono.html" with nombre="producto" %}{% endif %}
+          </span>
+          <div>
+            <h3>{% if enlace %}<a class="enlace-acceso" href="{{ enlace }}">{{ nombre }}</a>{% else %}{{ nombre }}{% endif %}</h3>
+            <p>{{ descripcion }}</p>
+          </div>
+          {% include "personal/icono.html" with nombre="flecha" %}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</main>
+{% endblock %}

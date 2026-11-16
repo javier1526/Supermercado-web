@@ -1,0 +1,12 @@
+<div class="resumen-producto">
+  {% if producto.fotografia_comercial and producto.estado == 'activo' %}
+    <img class="miniatura-producto" src="{% url 'cliente:fotografia_producto' producto.pk %}" alt="Fotografía comercial de {{ producto.nombre_producto }}" loading="lazy">
+  {% else %}
+    <span class="marco-miniatura">{% include "personal/icono.html" with nombre="producto" %}</span>
+  {% endif %}
+  <div>
+    <h2>{{ producto.nombre_producto }}</h2>
+    <p>{{ producto.marca }}</p>
+    <span class="estado-producto">{{ producto.get_estado_display }}</span>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+{% for categoria in categorias %}
+  <section class="mb-5 carrusel-categoria" aria-labelledby="categoria-{{ categoria.pk }}">
+    <div class="encabezado-categoria d-flex justify-content-between align-items-center gap-3 mb-2">
+      <h2 class="h4 mb-0" id="categoria-{{ categoria.pk }}">{{ categoria.nombre }}</h2>
+      <a class="btn boton-salida d-inline-flex align-items-center flex-shrink-0" href="{% url 'cliente:productos_categoria' categoria.pk %}">Ver categoría<span class="visually-hidden"> {{ categoria.nombre }}</span></a>
+    </div>
+    {% if categoria.productos_inicio %}
+      <ul class="carrusel-productos list-unstyled" tabindex="0" aria-label="Productos de {{ categoria.nombre }}">
+        {% for producto in categoria.productos_inicio %}
+          <li>{% include "catalogo/tarjeta_publica.html" with parametros_tarjetas="" %}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="alert aviso-personal">No se encontraron productos</p>
+    {% endif %}
+  </section>
+{% empty %}
+  <p>No hay categorías disponibles.</p>
+{% endfor %}

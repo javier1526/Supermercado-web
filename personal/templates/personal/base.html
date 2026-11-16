@@ -1,0 +1,15 @@
+{% load static %}
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}{% endblock %} | Supermercado Central</title>
+  <link rel="stylesheet" href="{% static 'personal/bootstrap-5.3.8.min.css' %}">
+  <link rel="stylesheet" href="{% static 'personal/personal.css' %}">
+  {% block estilos %}{% endblock %}
+</head>
+<body class="pantalla-personal">
+  {% block contenido %}{% endblock %}
+</body>
+</html>

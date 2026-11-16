@@ -1,0 +1,39 @@
+{% extends "catalogo/base_publica.html" %}
+{% load static %}
+{% load formato_comercial %}
+{% block titulo %}Buscar productos{% endblock %}
+{% block contenido_publico %}
+
+<main class="container py-4 py-lg-5">
+  <div class="row mb-4">
+    <section class="col-12 col-lg-9 col-xl-8" aria-labelledby="titulo-buscador">
+      <h1 class="h2 mb-3" id="titulo-buscador">{% if enviada %}Buscar productos{% else %}Encuentra tu producto{% endif %}</h1>
+      <form class="buscador-cliente" method="get" action="{% url 'cliente:inicio' %}" id="buscador-publico" data-sugerencias="{% url 'cliente:sugerencias' %}">
+        <label for="consulta">Nombre o marca</label>
+        <div class="control-busqueda">
+          <input class="form-control flex-grow-1 w-100" type="search" id="consulta" name="consulta" value="{{ consulta }}" placeholder="Ej.: papas fritas" autocomplete="off" aria-controls="sugerencias">
+          <button class="btn boton-personal flex-shrink-0" type="submit">{% include "personal/icono.html" with nombre="buscar" %}<span class="visually-hidden">Buscar</span></button>
+        </div>
+        <ul class="list-group mt-2 list-unstyled" id="sugerencias" aria-label="Sugerencias de productos" hidden></ul>
+        <p class="visually-hidden" id="estado-sugerencias" role="status"></p>
+      </form>
+    </section>
+  </div>
+  {% if mensaje %}
+    <p class="alert aviso-personal" role="status">{{ mensaje }}</p>
+  {% elif enviada %}
+    <section aria-labelledby="titulo-resultados">
+      <div class="d-flex flex-wrap justify-content-between align-items-baseline gap-2 mb-3">
+        <h2 class="h4 mb-0" id="titulo-resultados">Resultados de búsqueda</h2>
+        <p class="mb-0">{{ productos|length }} producto{{ productos|length|pluralize:"s" }} encontrado{{ productos|length|pluralize:"s" }}</p>
+      </div>
+      {% include "catalogo/ordenar_publico.html" %}
+      {% include "catalogo/cuadricula_publica.html" %}
+    </section>
+  {% else %}
+    <p>Busca por el nombre de un producto o por su marca.</p>
+    {% include "catalogo/carruseles_publicos.html" %}
+  {% endif %}
+</main>
+<script src="{% static 'catalogo/busqueda.js' %}" defer></script>
+{% endblock %}

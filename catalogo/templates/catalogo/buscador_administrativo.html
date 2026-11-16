@@ -1,0 +1,8 @@
+<form method="get" class="buscador-administrativo mb-4">
+  <label for="consulta">Nombre o marca</label>
+  <div class="control-busqueda-personal">
+    {% include "personal/icono.html" with nombre="buscar" %}
+    <input class="form-control" id="consulta" name="consulta" value="{{ consulta }}" placeholder="Buscar por nombre o marca…">
+    <button class="btn boton-personal" type="submit">{% include "personal/icono.html" with nombre="buscar" %}<span class="visually-hidden">Buscar producto</span></button>
+  </div>
+</form>

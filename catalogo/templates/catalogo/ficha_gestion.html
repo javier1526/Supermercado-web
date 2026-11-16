@@ -1,0 +1,70 @@
+{% extends "personal/base.html" %}
+{% load static %}
+{% load formato_comercial %}
+{% block titulo %}Ficha de gestión{% endblock %}
+{% block contenido %}
+<main class="container ficha-gestion py-4 py-lg-5">
+  {% url 'catalogo:seleccionar_gestion' as regreso %}
+  {% include 'personal/cabecera_formulario.html' with titulo_cabecera='Ficha de gestión' regreso=regreso texto_regreso='Volver a productos' subtitulo='Jefatura' %}
+  {% for mensaje in messages %}<p class="alert aviso-personal" role="status">{{ mensaje }}</p>{% endfor %}
+  <div class="row g-3 align-items-start">
+    <section class="col-12 col-lg-6">
+      <div class="card tarjeta-personal rounded-4">
+        <div class="card-body p-3 p-md-4">
+          {% include "catalogo/resumen_administrativo.html" %}
+          <dl class="mb-0">
+            <dt>Código de barras</dt><dd>{{ producto.codigo_barras }}</dd>
+            <dt>Categoría</dt><dd>{{ producto.categoria }}</dd>
+            <dt>Precio normal vigente</dt><dd class="valor-actual fs-4 fw-bold mb-0">{{ producto.precio_normal|precio_clp }} CLP</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+    {% if editable %}
+    <section class="col-12 col-lg-6">
+      <div class="card tarjeta-personal rounded-4">
+        <div class="card-body p-3 p-md-4">
+          <form method="post" action="{% url 'catalogo:actualizar_precio' producto.pk %}">
+            {% csrf_token %}
+            <h2 class="h4">Actualizar precio</h2>
+            {% if formulario.non_field_errors %}<div class="alert alert-danger" role="alert">{{ formulario.non_field_errors }}</div>{% endif %}
+            {{ formulario.precio_normal.label_tag }}
+            {{ formulario.precio_normal }}
+            <p class="form-text" id="id_precio_normal_helptext">{{ formulario.precio_normal.help_text }}</p>
+            {% if formulario.precio_normal.errors %}<div class="text-danger mb-3" role="alert">{{ formulario.precio_normal.errors }}</div>{% endif %}
+            <button type="submit" class="btn boton-personal w-100">Actualizar precio</button>
+          </form>
+          <hr class="my-4">
+          <button type="button" class="btn btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#confirmar-desactivacion">Desactivar producto</button>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+  </div>
+</main>
+{% if editable %}
+<div class="modal fade" id="confirmar-desactivacion" tabindex="-1" aria-labelledby="titulo-desactivacion" aria-describedby="detalle-desactivacion" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content tarjeta-personal rounded-4">
+      <div class="modal-header gap-3">
+        <h2 class="modal-title fs-5" id="titulo-desactivacion">Desactivar producto</h2>
+        <button type="button" class="btn boton-salida" data-bs-dismiss="modal" aria-label="Cerrar confirmación">Cerrar</button>
+      </div>
+      <div class="modal-body" id="detalle-desactivacion">
+        {% include "personal/icono.html" with nombre="advertencia" %}
+        <p>¿Estás seguro de que deseas desactivar este producto?</p>
+        <p class="mb-0">Dejará de mostrarse a los clientes. Su registro se conserva.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn boton-salida" data-bs-dismiss="modal">Cancelar</button>
+        <form method="post" action="{% url 'catalogo:desactivar_producto' producto.pk %}">
+          {% csrf_token %}
+          <button type="submit" name="confirmar" value="si" class="btn btn-danger">Desactivar producto</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{% static 'personal/bootstrap-5.3.8.bundle.min.js' %}" defer></script>
+{% endif %}
+{% endblock %}

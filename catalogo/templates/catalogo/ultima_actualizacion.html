@@ -1,0 +1,40 @@
+{% extends "personal/base.html" %}
+{% load tz %}
+{% block titulo %}Última actualización de ubicación{% endblock %}
+{% block contenido %}
+<main class="container py-4 py-lg-5">
+  {% url 'catalogo:seleccionar_actualizacion' as regreso %}
+  {% include 'personal/cabecera_formulario.html' with titulo_cabecera='Última actualización de ubicación' regreso=regreso texto_regreso='Volver a productos' subtitulo='Consulta administrativa' %}
+  <div class="row g-3">
+    <section class="col-12 col-lg-5">
+      <div class="card tarjeta-personal rounded-4 h-100">
+        <div class="card-body p-3 p-md-4">
+          {% include "catalogo/resumen_administrativo.html" %}
+          <p class="mb-0">Pasillo actual: <strong>{{ ubicacion.pasillo|default:"Sin pasillo definido" }}</strong></p>
+        </div>
+      </div>
+    </section>
+    <section class="col-12 col-lg-7">
+      <div class="card tarjeta-personal rounded-4 h-100">
+        <div class="card-body valor-actual p-3 p-md-4">
+          <span class="icono-acceso mb-3">{% include "personal/icono.html" with nombre="reloj" %}</span>
+          <h2 class="h4">Último cambio de ubicación</h2>
+          {% if ubicacion.ultimo_responsable %}
+            <p>Responsable: <strong>{{ ubicacion.ultimo_responsable.usuario.get_full_name }}</strong></p>
+          {% else %}
+            <p>Todavía no hay una actualización de ubicación registrada.</p>
+          {% endif %}
+          {% if ubicacion.fecha_ultima_actualizacion %}
+            {% timezone "America/Santiago" %}
+              <p class="mb-0">Fecha y hora: <strong>{{ ubicacion.fecha_ultima_actualizacion|localtime|date:"d/m/Y H:i" }}</strong></p>
+            {% endtimezone %}
+            <p class="form-text mb-0">Hora de Chile (America/Santiago).</p>
+          {% else %}
+            <p class="mb-0">Fecha de actualización no disponible.</p>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}

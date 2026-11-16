@@ -1,0 +1,62 @@
+{% extends "personal/base.html" %}
+{% load static %}
+{% block titulo %}Actualizar ubicación{% endblock %}
+{% block contenido %}
+<main class="container edicion-operativa py-4 py-lg-5">
+  {% url 'catalogo:seleccionar_ubicacion' as regreso %}
+  {% include 'personal/cabecera_formulario.html' with titulo_cabecera='Actualizar ubicación' regreso=regreso texto_regreso='Volver a productos' subtitulo='Reponedor' %}
+  {% for mensaje in messages %}
+    <p class="alert aviso-personal" role="status">{{ mensaje }}</p>
+  {% endfor %}
+  <div class="row g-3 align-items-start">
+    <section class="col-12 col-lg-5">
+      <div class="card tarjeta-personal rounded-4">
+        <div class="card-body p-3 p-md-4">
+          {% include "catalogo/resumen_administrativo.html" %}
+          <p>Pasillo actual: <strong>{% if ubicacion.pasillo %}{{ ubicacion.pasillo }} · Supermercado {{ ubicacion.pasillo.supermercado_id }}{% else %}Sin pasillo definido{% endif %}</strong></p>
+        </div>
+      </div>
+    </section>
+    <section class="col-12 col-lg-7">
+      <div class="card tarjeta-personal rounded-4">
+        <form method="post" enctype="multipart/form-data" class="card-body p-3 p-md-4">
+          {% csrf_token %}
+          <p>Puedes modificar el pasillo, la fotografía o ambos. Los campos son opcionales.</p>
+          {% if formulario.non_field_errors %}
+            <div class="alert alert-danger" role="alert">{{ formulario.non_field_errors }}</div>
+          {% endif %}
+          {% for campo in formulario %}
+            <div class="mb-3">
+              {% if campo.name == "fotografia_referencial" %}
+                <h3 class="h6 mt-4">Fotografía de ubicación actual</h3>
+                {% if ubicacion.fotografia_referencial %}
+                  <img class="fotografia-ubicacion-edicion img-fluid rounded-3 mb-3" src="{% url 'catalogo:foto_ubicacion' producto.pk %}" alt="Ubicación actual de {{ producto.nombre_producto }}">
+                {% else %}
+                  <p>Todavía no hay una fotografía de ubicación.</p>
+                {% endif %}
+              {% endif %}
+              {{ campo.label_tag }}
+              {{ campo }}
+              {% if campo.help_text %}
+                <p class="form-text" id="{{ campo.auto_id }}_helptext">{{ campo.help_text }}</p>
+              {% endif %}
+              {% if campo.errors %}
+                <div class="text-danger" role="alert">{{ campo.errors }}</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+          {% if volver_a_adjuntar %}
+            <p class="alert aviso-personal">Vuelve a adjuntar la fotografía antes de guardar.</p>
+          {% endif %}
+          <figure id="vista-previa-ubicacion" class="mb-3" hidden>
+            <figcaption class="mb-2">Vista previa de fotografía (sin guardar)</figcaption>
+            <img class="img-fluid rounded-3" alt="Vista previa de la nueva fotografía de ubicación">
+          </figure>
+          <button class="btn boton-personal w-100" type="submit">Guardar cambios</button>
+        </form>
+      </div>
+    </section>
+  </div>
+</main>
+<script src="{% static 'catalogo/ubicacion.js' %}" defer></script>
+{% endblock %}

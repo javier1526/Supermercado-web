@@ -1,0 +1,7 @@
+<header class="cabecera-formulario">
+  <a class="btn retorno" href="{{ regreso }}" aria-label="{{ texto_regreso }}">{% include "personal/icono.html" with nombre="volver" %}</a>
+  <div>
+    <h1>{{ titulo_cabecera }}</h1>
+    {% if subtitulo %}<p class="small mb-0 mt-1">{{ subtitulo }}</p>{% endif %}
+  </div>
+</header>

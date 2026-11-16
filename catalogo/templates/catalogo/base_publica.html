@@ -1,0 +1,22 @@
+{% extends "personal/base.html" %}
+{% load static %}
+{% block estilos %}<link rel="stylesheet" href="{% static 'catalogo/publico.css' %}">{% endblock %}
+{% block contenido %}
+<div class="interfaz-publica">
+<header class="cabecera-personal">
+  <div class="container py-3 py-md-4 d-flex gap-3 align-items-center">
+    <span class="marca-sello" aria-hidden="true">S</span>
+    <div class="identidad-publica">
+      <a href="{% url 'cliente:inicio' %}" class="h5 d-inline-block text-decoration-none mb-1">Supermercado Central</a>
+      <p class="small mb-0">Consulta y ubicación de productos</p>
+    </div>
+    <nav class="navegacion-publica ms-md-auto d-flex gap-2" aria-label="Navegación principal">
+      <a class="enlace-navegacion{% if request.resolver_match.url_name == 'inicio' or request.resolver_match.url_name == 'ficha_producto' %} activo{% endif %}" href="{% url 'cliente:inicio' %}"{% if request.resolver_match.url_name == 'inicio' %} aria-current="page"{% endif %}>{% include "personal/icono.html" with nombre="inicio" %}<span>Inicio</span></a>
+      <a class="enlace-navegacion{% if request.resolver_match.url_name == 'categorias' or request.resolver_match.url_name == 'productos_categoria' %} activo{% endif %}" href="{% url 'cliente:categorias' %}"{% if request.resolver_match.url_name == 'categorias' %} aria-current="page"{% endif %}>{% include "personal/icono.html" with nombre="categorias" %}<span>Categorías</span></a>
+      <a class="enlace-navegacion{% if request.resolver_match.url_name == 'ubicacion' or request.resolver_match.url_name == 'plano' or request.resolver_match.url_name == 'pasillos' or request.resolver_match.url_name == 'productos_pasillo' %} activo{% endif %}" href="{% url 'cliente:ubicacion' %}"{% if request.resolver_match.url_name == 'ubicacion' %} aria-current="page"{% endif %}>{% include "personal/icono.html" with nombre="ubicacion" %}<span>Ubicación</span></a>
+    </nav>
+  </div>
+</header>
+{% block contenido_publico %}{% endblock %}
+</div>
+{% endblock %}

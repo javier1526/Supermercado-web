@@ -1,0 +1,27 @@
+{% extends "catalogo/base_publica.html" %}
+{% load static %}
+{% block titulo %}Mapa del supermercado{% endblock %}
+{% block contenido_publico %}
+<main class="container py-4 py-lg-5">
+  <a class="btn boton-salida d-inline-flex align-items-center mb-3" href="{% url 'cliente:ubicacion' %}">{% include "personal/icono.html" with nombre="volver" %}Volver a Ubicación</a>
+  <h1 class="h2 mb-4">Mapa del supermercado</h1>
+  {% if plano %}
+    <div id="controles-plano" class="mb-3" hidden>
+      <div class="d-flex flex-wrap align-items-center gap-2" role="group" aria-label="Ampliación del plano">
+        <button id="ampliar-plano" type="button" class="btn boton-personal" aria-controls="visor-plano">Ampliar</button>
+        <button id="reducir-plano" type="button" class="btn boton-salida" aria-controls="visor-plano">Reducir</button>
+        <button id="restablecer-plano" type="button" class="btn boton-salida" aria-controls="visor-plano">Restablecer</button>
+        <output id="escala-plano" aria-live="polite" aria-label="Escala del plano">100%</output>
+      </div>
+    </div>
+    <p id="ayuda-plano">Puedes ampliar el plano y desplazarte dentro de la imagen para leer sus detalles.</p>
+    <div id="visor-plano" class="visor-plano rounded-4 border bg-white" tabindex="0" role="region" aria-label="Plano general del supermercado" aria-describedby="ayuda-plano">
+      <img class="imagen-plano" src="{% static plano %}" alt="Plano general del supermercado con la distribución y numeración de sus pasillos">
+    </div>
+    <a class="btn boton-salida d-inline-flex align-items-center mt-3" href="{% static plano %}">Abrir imagen en tamaño original</a>
+  {% else %}
+    <p class="alert aviso-personal" role="status">Plano general no disponible por el momento</p>
+  {% endif %}
+</main>
+{% if plano %}<script src="{% static 'catalogo/plano.js' %}" defer></script>{% endif %}
+{% endblock %}

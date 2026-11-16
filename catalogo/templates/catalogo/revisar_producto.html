@@ -1,0 +1,67 @@
+{% extends "personal/base.html" %}
+
+{% block titulo %}Revisar producto pendiente{% endblock %}
+
+{% block contenido %}
+<main class="container py-4 py-lg-5">
+  {% url 'catalogo:pendientes' as regreso %}
+  {% include 'personal/cabecera_formulario.html' with titulo_cabecera='Revisar producto pendiente' regreso=regreso texto_regreso='Volver a pendientes' subtitulo='Jefatura · producto sin publicar' %}
+
+  <div class="row g-3 align-items-start">
+    <div class="col-12 col-lg-7">
+      <section class="card tarjeta-personal rounded-4">
+        <div class="card-body p-3 p-md-4">
+          <div class="presentacion-revision">
+          {% if producto.fotografia_comercial %}
+            <img class="fotografia-revision" width="240" height="180"
+                 src="{% url 'catalogo:foto_producto_pendiente' producto.pk %}"
+                 alt="Fotografía comercial de {{ producto.nombre_producto }}">
+          {% endif %}
+          <div><h2 class="h4 mb-3">{{ producto.nombre_producto }}</h2>
+          <dl class="mb-0">
+            <dt>Código de barras</dt>
+            <dd>{{ producto.codigo_barras }}</dd>
+            <dt>Marca</dt>
+            <dd>{{ producto.marca }}</dd>
+            <dt>Categoría</dt>
+            <dd>{{ producto.categoria }}</dd>
+          </dl>
+          </div></div>
+          {% if producto.descripcion %}
+            <h3 class="h6 mt-3">Descripción</h3>
+            <p class="mb-0">{{ producto.descripcion|linebreaksbr }}</p>
+          {% endif %}
+          <p class="valor-actual mb-0 mt-4"><strong class="h6">Registro pendiente de aprobación</strong><br>No visible para el Cliente.</p>
+        </div>
+      </section>
+    </div>
+    <div class="col-12 col-lg-5">
+      <section class="card tarjeta-personal rounded-4">
+        <div class="card-body p-3 p-md-4">
+          <h2 class="h5 mb-3">Decisión de Jefatura</h2>
+          <form method="post" action="{% url 'catalogo:aprobar_producto' producto.pk %}" class="d-grid gap-3 mb-2">
+            {% csrf_token %}
+            {% with campo=formulario.precio_inicial %}
+              <div>
+                {{ campo.label_tag }}
+                {{ campo }}
+                <p class="form-text mb-0" id="{{ campo.auto_id }}_helptext">
+                  {{ campo.help_text }} El precio solo se requiere para aprobar.
+                </p>
+                {% if campo.errors %}
+                  <div class="text-danger mt-2" role="alert">{{ campo.errors }}</div>
+                {% endif %}
+              </div>
+            {% endwith %}
+            <button type="submit" class="btn boton-personal">Aprobar</button>
+          </form>
+          <form method="post" action="{% url 'catalogo:rechazar_producto' producto.pk %}" class="d-grid">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger">Rechazar</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+{% endblock %}

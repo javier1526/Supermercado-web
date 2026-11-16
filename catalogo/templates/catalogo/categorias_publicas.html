@@ -1,0 +1,14 @@
+{% extends "catalogo/base_publica.html" %}
+{% block titulo %}Categorías{% endblock %}
+{% block contenido_publico %}
+<main class="container py-4 py-lg-5">
+  <h1 class="h2 mb-4">Categorías</h1>
+  <ul class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 list-unstyled">
+    {% for categoria in categorias %}
+      <li class="col"><a class="card tarjeta-personal rounded-4 h-100 text-decoration-none link-body-emphasis p-4" href="{% url 'cliente:productos_categoria' categoria.pk %}">{{ categoria.nombre }}</a></li>
+    {% empty %}
+      <li>No hay categorías disponibles.</li>
+    {% endfor %}
+  </ul>
+</main>
+{% endblock %}

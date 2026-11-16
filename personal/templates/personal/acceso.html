@@ -1,0 +1,52 @@
+{% extends "personal/base.html" %}
+
+{% block titulo %}Acceso del personal{% endblock %}
+
+{% block contenido %}
+<main class="container acceso-personal py-4 py-lg-5">
+  <div>
+    <div>
+      <header class="identidad-acceso">
+        <span class="marca-sello" aria-hidden="true">S</span>
+        <p class="mb-0">Supermercado Central</p>
+      </header>
+    </div>
+    <div>
+      <section class="formulario-acceso">
+        <div>
+          {% for mensaje in messages %}
+            <p class="alert aviso-personal" role="status">{{ mensaje }}</p>
+          {% endfor %}
+          <div class="emblema-personal">{% include "personal/icono.html" with nombre="personal" %}</div>
+          <h1 class="h3 mb-2">Acceso del personal</h1>
+          <p class="mb-4">Reponedor y Jefatura</p>
+
+          <form method="post" action="{% url 'personal:acceso' %}">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger" role="alert">
+                {{ form.non_field_errors }}
+              </div>
+            {% endif %}
+            {% for campo in form.visible_fields %}
+              <div class="mb-3">
+                {{ campo.label_tag }}
+                <div class="campo-con-icono">
+                  {% if campo.name == "username" %}{% include "personal/icono.html" with nombre="usuario" %}{% else %}{% include "personal/icono.html" with nombre="candado" %}{% endif %}
+                  {{ campo }}
+                </div>
+                {% if campo.errors %}
+                  <div class="text-danger mt-1">
+                    {{ campo.errors }}
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+            <button class="btn boton-personal w-100 mt-2" type="submit">Iniciar sesión</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+{% endblock %}

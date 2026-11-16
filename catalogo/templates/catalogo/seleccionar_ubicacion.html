@@ -1,0 +1,29 @@
+{% extends "personal/base.html" %}
+{% block titulo %}Actualizar ubicación{% endblock %}
+{% block contenido %}
+<main class="container py-4 py-lg-5">
+  {% url 'personal:panel_reponedor' as regreso %}
+  {% include 'personal/cabecera_formulario.html' with titulo_cabecera='Actualizar ubicación' regreso=regreso texto_regreso='Volver al panel' subtitulo='Reponedor' %}
+  <p>Selecciona un producto activo para cambiar su pasillo o fotografía de ubicación.</p>
+  {% for mensaje in messages %}
+    <p class="alert aviso-personal" role="status">{{ mensaje }}</p>
+  {% endfor %}
+  {% include "catalogo/buscador_administrativo.html" %}
+  <ul class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 list-unstyled">
+    {% for producto in productos %}
+      <li class="col">
+        <article class="card tarjeta-personal rounded-4 h-100">
+          <div class="card-body p-3 p-md-4">
+            {% include "catalogo/resumen_administrativo.html" %}
+            <a class="btn boton-salida d-inline-flex align-items-center" href="{% url 'catalogo:actualizar_ubicacion' producto.pk %}">
+              Seleccionar <span class="visually-hidden">{{ producto.nombre_producto }}</span>
+            </a>
+          </div>
+        </article>
+      </li>
+    {% empty %}
+      <li class="col-12"><p class="alert aviso-personal">No se encontraron productos activos.</p></li>
+    {% endfor %}
+  </ul>
+</main>
+{% endblock %}

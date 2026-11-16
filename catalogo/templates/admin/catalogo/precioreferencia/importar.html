@@ -1,0 +1,40 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'admin/css/forms.css' %}">
+{% endblock %}
+{% block breadcrumbs %}
+  <div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">Inicio</a>
+    &rsaquo; <a href="{% url 'admin:catalogo_precioreferencia_changelist' %}">Precios de referencia</a>
+    &rsaquo; Importar CSV
+  </div>
+{% endblock %}
+{% block content %}
+  <div id="content-main">
+    <p>El archivo se valida por completo antes de guardar. Los códigos existentes actualizan únicamente su referencia; los precios definitivos de productos permanecen intactos.</p>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% if formulario.errors %}
+        <p class="errornote" role="alert">No se realizó la importación. Corrige el error y vuelve a seleccionar el archivo.</p>
+      {% endif %}
+      {{ formulario.non_field_errors }}
+      <fieldset class="module aligned">
+        <div class="form-row">
+          {{ formulario.archivo_csv.errors }}
+          <div class="flex-container">
+            {{ formulario.archivo_csv.label_tag }}
+            {{ formulario.archivo_csv }}
+          </div>
+          <div class="help" id="id_archivo_csv_helptext">{{ formulario.archivo_csv.help_text }}</div>
+        </div>
+      </fieldset>
+      <p>Debes utilizar exactamente las columnas <code>codigo_barras,precio_referencia</code>, con códigos textuales y precios enteros positivos en CLP.</p>
+      <div class="submit-row">
+        <input type="submit" value="Importar CSV" class="default">
+        <a href="{% url 'admin:catalogo_precioreferencia_changelist' %}" class="closelink">Volver a referencias</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

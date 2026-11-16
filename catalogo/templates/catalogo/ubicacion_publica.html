@@ -1,0 +1,34 @@
+{% load tz %}
+<section class="ubicacion-producto-publica mt-4 mt-lg-5 pt-4 border-top" aria-labelledby="titulo-ubicacion">
+  <h2 class="h3 mb-3" id="titulo-ubicacion">Ubicación del producto</h2>
+  <div class="row g-4">
+    <div class="col-12 col-lg-8">
+      <p class="indicador-pasillo">
+        {% include "personal/icono.html" with nombre="ubicacion" %}
+        {% if ubicacion.pasillo %}Pasillo {{ ubicacion.pasillo.numero_pasillo }}{% else %}Ubicación por confirmar{% endif %}
+      </p>
+      <h3 class="h6">Fotografía referencial de ubicación</h3>
+      {% if fotografia_ubicacion_disponible %}
+        <div class="ratio ratio-4x3 bg-white rounded-4">
+          <img class="object-fit-contain rounded-4" src="{% url 'cliente:fotografia_ubicacion' producto.pk %}" alt="Fotografía referencial de ubicación de {{ producto.nombre_producto }}">
+        </div>
+      {% else %}
+        <p class="bg-white rounded-4 p-4 mb-0">Sin imagen</p>
+      {% endif %}
+    </div>
+    <div class="col-12 col-lg-4 fecha-ubicacion">
+      {% include "personal/icono.html" with nombre="reloj" %}
+      <div>
+      <h3 class="h6">Última actualización de ubicación</h3>
+      {% if ubicacion.fecha_ultima_actualizacion %}
+        {% timezone "America/Santiago" %}
+          <p class="mb-1">{{ ubicacion.fecha_ultima_actualizacion|localtime|date:"d/m/Y H:i" }}</p>
+        {% endtimezone %}
+        <p class="small mb-0">Hora de Chile (America/Santiago).</p>
+      {% else %}
+        <p class="mb-0">Fecha de actualización no disponible</p>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

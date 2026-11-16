@@ -1,0 +1,32 @@
+{% extends "catalogo/base_publica.html" %}
+{% load formato_comercial %}
+{% block titulo %}{{ producto.nombre_producto }}{% endblock %}
+{% block contenido_publico %}
+<main class="container py-4 py-lg-5">
+  <a class="btn boton-salida d-inline-flex align-items-center mb-4" href="{{ volver_a }}">{% include "personal/icono.html" with nombre="volver" %}{{ texto_regreso }}</a>
+  <h1 class="h2 mb-4">Detalle del producto</h1>
+  <article class="row g-4 align-items-start" aria-labelledby="nombre-producto">
+    <div class="col-12 col-md-5 col-lg-6">
+      <div class="ratio ratio-1x1 fotografia-ficha">
+        {% if fotografia_disponible %}
+          <img class="object-fit-contain rounded-4" src="{% url 'cliente:fotografia_producto' producto.pk %}" alt="Fotografía comercial de {{ producto.nombre_producto }}">
+        {% endif %}
+        <span class="etiqueta-fotografia">Foto comercial</span>
+      </div>
+    </div>
+    <div class="col-12 col-md-7 col-lg-6 informacion-comercial">
+      <h2 class="h3" id="nombre-producto">{{ producto.nombre_producto }}</h2>
+      <p>Marca: {{ producto.marca }}</p>
+      <div class="precio-y-stock">
+        <p><span class="visually-hidden">Precio normal: </span>{{ producto.precio_normal|precio_clp }}</p>
+        {% include "catalogo/stock_publico.html" %}
+      </div>
+      <section class="mt-4 pt-4 border-top" aria-labelledby="titulo-descripcion">
+        <h3 class="h5" id="titulo-descripcion">Descripción</h3>
+        <div id="descripcion-producto" class="py-2">{{ producto.descripcion|default_if_none:""|linebreaksbr }}</div>
+      </section>
+    </div>
+  </article>
+  {% include "catalogo/ubicacion_publica.html" %}
+</main>
+{% endblock %}
